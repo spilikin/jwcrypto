@@ -162,7 +162,10 @@ JWKEllipticCurveRegistry = {'P-256': 'P-256 curve',
                             'Ed25519': 'Ed25519 signature algorithm key pairs',
                             'Ed448': 'Ed448 signature algorithm key pairs',
                             'X25519': 'X25519 function key pairs',
-                            'X448': 'X448 function key pairs'}
+                            'X448': 'X448 function key pairs',
+                            'BP-256': 'BrainpoolP256R1 curve',
+                            'BP-384': 'BrainpoolP384R1 curve',
+                            'BP-512': 'BrainpoolP512R1 curve'}
 """Registry of allowed Elliptic Curves"""
 
 # RFC 7517 - 8.2
@@ -186,7 +189,10 @@ JWKOperationsRegistry = {'sign': 'Compute digital Signature or MAC',
 JWKpycaCurveMap = {'secp256r1': 'P-256',
                    'secp384r1': 'P-384',
                    'secp521r1': 'P-521',
-                   'secp256k1': 'secp256k1'}
+                   'secp256k1': 'secp256k1',
+                   'brainpoolP256r1': 'BP-256',
+                   'brainpoolP384r1': 'BP-384',
+                   'brainpoolP512r1': 'BP-512'}
 
 IANANamedInformationHashAlgorithmRegistry = {
     'sha-256': hashes.SHA256(),
@@ -453,6 +459,12 @@ class JWK(dict):
             return ec.SECP521R1()
         elif cname == 'secp256k1':
             return ec.SECP256K1()
+        elif cname == 'BP-256':
+            return ec.BrainpoolP256R1()
+        elif cname == 'BP-384':
+            return ec.BrainpoolP384R1()
+        elif cname == 'BP-512':
+            return ec.BrainpoolP512R1()
         elif cname in _OKP_CURVES_TABLE:
             return _OKP_CURVES_TABLE[cname]
         else:
