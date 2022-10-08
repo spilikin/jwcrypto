@@ -1070,6 +1070,7 @@ class TestJWS(unittest.TestCase):
             key = jwk.JWK(**key_data)
             payload = bytes(bytearray(A1_payload))
             jws_test = jws.JWS(payload)
+            jws_test.allowed_algs = ["BP256R1", "BP384R1", "BP512R1"]
 
             curve_name = key.get('crv')
             if curve_name == "BP-256":
